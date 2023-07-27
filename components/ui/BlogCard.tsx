@@ -18,12 +18,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ data }) => {
 
   return (
     <article
-      onClick={() => router.push("/blog/id")}
+      onClick={() => router.push(`/blog/${data.id}`)}
       className="cursor-pointer flex max-w-xl flex-col items-start justify-between"
     >
       <div className="group relative">
         <h2 className="text-lg font-semibold leading-snug tracking-tight mt-2    dark:text-white">
-          <a href="/blog/id">
+          <a href={`/blog/${data.id}`}>
             <span className="bg-gradient-to-r from-purple-200 to-purple-100 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px] dark:from-purple-800 dark:to-purple-900">
               {data.title}
             </span>

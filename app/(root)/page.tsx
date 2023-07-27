@@ -1,7 +1,11 @@
 import BlogCard from "@/components/ui/BlogCard";
 
 async function getData() {
-  const res = await fetch("https://gorest.co.in/public/v2/posts");
+  const res = await fetch("https://gorest.co.in/public/v2/posts", {
+    headers: {
+      Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+    },
+  });
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
