@@ -8,15 +8,11 @@ const Navbar = () => {
           <a className="mr-5 cursor-pointer font-medium hover:text-purple-600">
             Home
           </a>
+
           <a className="mr-5 cursor-pointer font-medium hover:text-purple-600">
-            About
+            <span className="ml-3 text-md font-extrabold">Blogging</span>
           </a>
-          <a className="mr-5 cursor-pointer font-medium hover:text-purple-600">
-            <span className="ml-3 text-xl">Blogging</span>
-          </a>
-          <a className="mr-5 cursor-pointer font-medium hover:text-purple-600">
-            Contact
-          </a>
+
           <a className="mr-5 cursor-pointer font-medium hover:text-purple-600">
             User
           </a>
