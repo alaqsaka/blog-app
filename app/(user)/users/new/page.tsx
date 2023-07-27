@@ -24,7 +24,7 @@ import React from "react";
 
 const NewUserPage = () => {
   return (
-    <div className="w-4/6 mx-auto">
+    <div className="w-5/6 lg:w-4/6 mx-auto">
       <p className="text-xl font-bold">Create New User</p>
     </div>
   );

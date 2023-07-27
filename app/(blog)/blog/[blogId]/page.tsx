@@ -59,7 +59,7 @@ const BlogPage = async ({ params }: { params: { blogId: string } }) => {
   console.log(comments);
 
   return (
-    <div className="w-4/6 mx-auto">
+    <div className="w-5/6 lg:w-4/6 mx-auto">
       <h1 className="text-brand-primary mb-3 mt-2 text-center text-3xl font-semibold tracking-tight dark:text-white lg:text-4xl ">
         {data.title}
       </h1>
