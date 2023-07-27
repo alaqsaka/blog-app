@@ -26,10 +26,6 @@ interface CellActionProps {
 }
 
 const CellAction: React.FC<CellActionProps> = ({ data }) => {
-  const [showStatusBar, setShowStatusBar] = React.useState(true);
-  const [showActivityBar, setShowActivityBar] = React.useState(false);
-  const [showPanel, setShowPanel] = React.useState(false);
-
   return (
     <div>
       <DropdownMenu>
