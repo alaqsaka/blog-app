@@ -1,3 +1,16 @@
+import { Separator } from "@/components/ui/separator";
+import { UserCircle } from "lucide-react";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
+interface Comment {
+  name: string;
+  email: string;
+  body: string;
+  id: number;
+  post_id: number;
+}
+
 async function getData(blogId: string) {
   const res = await fetch(`https://gorest.co.in/public/v2/posts/${blogId}`, {
     headers: {
@@ -16,10 +29,34 @@ async function getData(blogId: string) {
   return res.json();
 }
 
+async function getComments(blogId: string) {
+  const res = await fetch(
+    `https://gorest.co.in/public/v2/posts/${blogId}/comments`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+      },
+    }
+  );
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
 const BlogPage = async ({ params }: { params: { blogId: string } }) => {
   const data = await getData(params.blogId);
 
+  const comments = await getComments(params.blogId);
+
   console.log(data);
+  console.log(comments);
 
   return (
     <div className="w-4/6 mx-auto">
@@ -40,6 +77,24 @@ const BlogPage = async ({ params }: { params: { blogId: string } }) => {
           {data.body}
         </div>
       </article>
+
+      <Separator className="mt-10" />
+      <div className="mt-3">
+        <p className="text-lg">Comments</p>
+        {comments.length > 0 ? (
+          comments.map((comment: Comment) => (
+            <div key={comment.id} className="mt-3">
+              <Alert variant="default">
+                <UserCircle className="h-4 w-4" />
+                <AlertTitle>{comment.name}</AlertTitle>
+                <AlertDescription>{comment.body}</AlertDescription>
+              </Alert>
+            </div>
+          ))
+        ) : (
+          <p>Comment not found</p>
+        )}
+      </div>
     </div>
   );
 };
