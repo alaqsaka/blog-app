@@ -34,7 +34,7 @@ const UserPage = async () => {
   console.log("data", users);
 
   return (
-    <div className="w-4/6 mx-auto">
+    <div className="w-5/6 lg:w-4/6 mx-auto">
       <DataTable columns={columns} data={users} />
     </div>
   );

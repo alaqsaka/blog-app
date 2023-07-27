@@ -20,6 +20,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { PlusIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -33,6 +36,7 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+  const router = useRouter();
 
   const table = useReactTable({
     data,
@@ -47,7 +51,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 justify-between">
         <Input
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
@@ -56,6 +60,11 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+
+        <Button onClick={() => router.push("/users/new")}>
+          <PlusIcon className="h-4 w-4 mr-2" />
+          Create new user
+        </Button>
       </div>
 
       <div className="rounded-md border">
