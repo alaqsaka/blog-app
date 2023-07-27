@@ -1,6 +1,4 @@
 import BlogCard from "@/components/ui/BlogCard";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 
 export default function Home() {
   const blogs = Array(20).fill({

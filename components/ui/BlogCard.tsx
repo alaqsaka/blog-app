@@ -1,12 +1,18 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import { useRouter } from "next/navigation";
 
 const BlogCard = () => {
+  const router = useRouter();
+
   return (
-    <article className="cursor-pointer flex max-w-xl flex-col items-start justify-between">
+    <article
+      onClick={() => router.push("/blog/id")}
+      className="cursor-pointer flex max-w-xl flex-col items-start justify-between"
+    >
       <div className="group relative">
         <h2 className="text-lg font-semibold leading-snug tracking-tight mt-2    dark:text-white">
-          <a href="/post/architectural-engineering-wonders-of-the-modern-era-for-your-inspiration">
+          <a href="/blog/id">
             <span className="bg-gradient-to-r from-purple-200 to-purple-100 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px] dark:from-purple-800 dark:to-purple-900">
               Earum textilis annus dolores sursum demoror suasoria
             </span>
