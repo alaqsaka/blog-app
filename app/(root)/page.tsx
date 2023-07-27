@@ -14,7 +14,7 @@ export default function Home() {
     <div className="w-4/6 mx-auto">
       <div className="mx-auto grid mt-10 max-w-2xl grid-cols-1 gap-x-8 gap-y-16  lg:mx-0 lg:max-w-none lg:grid-cols-3">
         {blogs.map((blog) => (
-          <BlogCard data={blog} key={blog.id} />
+          <BlogCard key={blog.id} />
         ))}
       </div>
     </div>
