@@ -3,8 +3,6 @@
 import React from "react";
 import UserForm from "../components/user-form";
 
-// TODO: Create new user
-
 const NewUserPage = () => {
   const user = null;
 
