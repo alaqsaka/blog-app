@@ -1,31 +1,18 @@
-import React from "react";
+"use client";
 
-// User Schema
-// [
-//     {
-//       "field": "email",
-//       "message": "can't be blank"
-//     },
-//     {
-//       "field": "name",
-//       "message": "can't be blank"
-//     },
-//     {
-//       "field": "gender",
-//       "message": "can't be blank, can be male of female"
-//     },
-//     {
-//       "field": "status",
-//       "message": "can't be blank"
-//     }
-//   ]
+import React from "react";
+import UserForm from "../components/user-form";
 
 // TODO: Create new user
 
 const NewUserPage = () => {
+  const user = null;
+
   return (
     <div className="w-5/6 lg:w-4/6 mx-auto">
       <p className="text-xl font-bold">Create New User</p>
+
+      <UserForm initialData={user} />
     </div>
   );
 };
