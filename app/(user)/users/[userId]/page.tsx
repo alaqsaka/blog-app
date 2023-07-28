@@ -1,5 +1,6 @@
 import BlogCard from "@/components/ui/BlogCard";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -8,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import { EditIcon, PlusSquare, TrashIcon } from "lucide-react";
 
 async function getUser(userId: string) {
@@ -16,12 +18,6 @@ async function getUser(userId: string) {
       Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
     },
   });
-
-  //   console.log("[GET_USER]", res);
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  // Recommendation: handle errors
 
   return res.json();
 }
@@ -35,12 +31,6 @@ async function getUserPost(userId: string) {
       },
     }
   );
-
-  //   console.log("[GET_USER]", res);
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  // Recommendation: handle errors
 
   return res.json();
 }
@@ -87,14 +77,16 @@ const UserDetailPage = async ({ params }: { params: { userId: string } }) => {
                   </p>
                 </CardContent>
                 <CardFooter className="flex-col gap-2">
-                  <Button variant="default" className="w-full">
-                    <EditIcon className="h-4 w-4 mr-2" />
-                    Update User
-                  </Button>
-                  <Button variant="destructive" className="w-full">
+                  <Link href={`/users/${user.id}/edit`} className="w-full">
+                    <Button variant="default" className="w-full">
+                      <EditIcon className="h-4 w-4 mr-2" />
+                      Update User
+                    </Button>
+                  </Link>
+                  {/* <Button variant="destructive" className="w-full">
                     <TrashIcon className="h-4 w-4 mr-2" />
                     Delete User
-                  </Button>
+                  </Button> */}
                 </CardFooter>
               </Card>
             </div>

@@ -89,7 +89,10 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
 
   return (
     <div>
-      <p className="text-xl font-bold">{title}</p>
+      <div className="flex justify-between">
+        <p className="text-xl font-bold">{title}</p>
+        <Button variant="destructive">Delete User</Button>
+      </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
