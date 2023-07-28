@@ -1,3 +1,4 @@
+import BlogCard from "@/components/ui/BlogCard";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -25,6 +26,25 @@ async function getUser(userId: string) {
   return res.json();
 }
 
+async function getUserPost(userId: string) {
+  const res = await fetch(
+    `https://gorest.co.in/public/v2/users/${userId}/posts`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+      },
+    }
+  );
+
+  //   console.log("[GET_USER]", res);
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  // Recommendation: handle errors
+
+  return res.json();
+}
+
 export type User = {
   id: number;
   name: string;
@@ -33,11 +53,18 @@ export type User = {
   email: string;
 };
 
+export type Blog = {
+  id: number;
+  user_id: number;
+  title: string;
+  body: string;
+};
+
 const UserDetailPage = async ({ params }: { params: { userId: string } }) => {
   // Get individual user by params
   const user = await getUser(params.userId);
 
-  console.log(user);
+  const posts = await getUserPost(params.userId);
 
   return (
     <div className="w-5/6 lg:w-4/6 mx-auto">
@@ -69,6 +96,18 @@ const UserDetailPage = async ({ params }: { params: { userId: string } }) => {
             </div>
             <div className="lg:w-full">
               <p className="text-xl font-bold">Blogs written by {user.name}</p>
+
+              {posts.length ? (
+                <>
+                  {posts.map((post: Blog) => (
+                    <Card key={post.id} className="p-2 mt-3">
+                      <BlogCard data={post} key={post.id} />
+                    </Card>
+                  ))}
+                </>
+              ) : (
+                <> Looks like {user.name} have not write any blog </>
+              )}
             </div>
           </div>
         </div>

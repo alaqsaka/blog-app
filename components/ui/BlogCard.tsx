@@ -3,9 +3,9 @@
 import { useRouter } from "next/navigation";
 
 interface Post {
-  id: string;
+  id: number;
   title: string;
-  user_id: string;
+  user_id: number;
   body: string;
 }
 
