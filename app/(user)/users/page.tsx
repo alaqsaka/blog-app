@@ -3,11 +3,14 @@ import { DataTable } from "./components/data-table";
 import { columns } from "./components/columns";
 
 async function getUsersData() {
-  const res = await fetch(`https://gorest.co.in/public/v2/users`, {
-    headers: {
-      Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-    },
-  });
+  const res = await fetch(
+    `https://gorest.co.in/public/v2/users?page1&per_page=100`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+      },
+    }
+  );
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
