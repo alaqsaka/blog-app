@@ -59,8 +59,14 @@ interface UserFormProps {
   initialData: User | null;
 }
 
+interface Errors {
+  field: string;
+  message: string;
+}
+
 const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<Errors[]>();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -86,13 +92,22 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to fetch data");
+        const responseData = await res.json();
+        setErrors(responseData);
+        throw Error;
       }
 
       toast.success("Success create user");
       //   await createUser(data).then((res) => console.log(res));
     } catch (error) {
-      toast.error("Internal server error");
+      let errorMessage = "";
+      if (errors) {
+        for (let index = 0; index < errors.length; index++) {
+          errorMessage += `${errors[index].field} ${errors[index].message}`;
+        }
+      }
+
+      toast.error(errorMessage);
       console.log("[POST_USER]", error);
     }
     setLoading(false);
