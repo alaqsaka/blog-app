@@ -17,7 +17,8 @@ async function getUser(userId: string) {
     headers: {
       Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
     },
-    cache: "no-store",
+    cache: "no-cache" || "no-store",
+    next: { revalidate: 0 },
   });
 
   return res.json();
@@ -30,6 +31,8 @@ async function getUserPost(userId: string) {
       headers: {
         Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
       },
+      cache: "no-cache" || "no-store",
+      next: { revalidate: 0 },
     }
   );
 
