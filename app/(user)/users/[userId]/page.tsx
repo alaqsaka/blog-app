@@ -17,6 +17,9 @@ async function getUser(userId: string) {
     headers: {
       Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
     },
+    next: {
+      revalidate: 60,
+    },
   });
 
   return res.json();

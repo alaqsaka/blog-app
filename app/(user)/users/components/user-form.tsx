@@ -58,14 +58,23 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
   const onSubmit = async (data: UserFormValues) => {
     setLoading(true);
 
-    const res = await fetch(`https://gorest.co.in/public/v2/users`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const res = initialData
+      ? await fetch(`https://gorest.co.in/public/v2/users/${initialData.id}`, {
+          method: "PATCH",
+          body: JSON.stringify(data),
+          headers: {
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        })
+      : await fetch(`https://gorest.co.in/public/v2/users`, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        });
 
     if (!res.ok) {
       const responseData = await res.json();
@@ -88,8 +97,6 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
   };
 
   const onDelete = async (userId: number) => {
-    console.log("Delete user ", userId);
-
     setLoading(true);
 
     const res = await fetch(
@@ -103,24 +110,17 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
       }
     );
 
-    console.log("res ", res);
-
     if (!res.ok) {
       const responseData = await res.json();
 
-      let errorMessage = "";
-      if (responseData.length) {
-        for (let index = 0; index < responseData.length; index++) {
-          errorMessage += `${responseData[index].field} ${responseData[index].message}`;
-        }
-      }
+      const errorMessage = responseData.message;
 
       setLoading(false);
       toast.error(errorMessage);
     } else {
       setLoading(false);
       toast.success("Success delete user");
-      routers.push(`/users/`);
+      routers.push(`/users`);
     }
   };
 
