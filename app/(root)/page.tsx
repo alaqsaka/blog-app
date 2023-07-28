@@ -5,6 +5,7 @@ async function getData() {
     headers: {
       Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
     },
+    cache: "no-store",
   });
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.

@@ -9,6 +9,7 @@ async function getUsersData() {
       headers: {
         Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
       },
+      cache: "no-store",
     }
   );
   // The return value is *not* serialized

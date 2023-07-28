@@ -10,16 +10,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { EditIcon, PlusSquare, TrashIcon } from "lucide-react";
+import { EditIcon, PlusSquare } from "lucide-react";
 
 async function getUser(userId: string) {
   const res = await fetch(`https://gorest.co.in/public/v2/users/${userId}`, {
     headers: {
       Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
     },
-    next: {
-      revalidate: 60,
-    },
+    cache: "no-store",
   });
 
   return res.json();
