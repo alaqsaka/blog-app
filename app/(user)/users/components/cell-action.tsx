@@ -20,12 +20,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 interface CellActionProps {
   data: User;
 }
 
 const CellAction: React.FC<CellActionProps> = ({ data }) => {
+  const router = useRouter();
+
   return (
     <div>
       <DropdownMenu>
@@ -41,11 +44,17 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
             <PlusIcon className="mr-2 h-4 w-4" />
             <span>Add New Post</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => router.push(`/users/${data.id}`)}
+            className="cursor-pointer"
+          >
             <User2Icon className="mr-2 h-4 w-4" />
             <span>View User</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => router.push(`/users/${data.id}/edit`)}
+            className="cursor-pointer"
+          >
             <EditIcon className="mr-2 h-4 w-4" />
             <span>Update User</span>
           </DropdownMenuItem>

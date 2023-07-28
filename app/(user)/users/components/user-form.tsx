@@ -61,10 +61,12 @@ interface UserFormProps {
 
 const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
   const [loading, setLoading] = useState(false);
+  const title = initialData ? "Edit User" : "Create New User";
+  const action = initialData ? "Save Changes" : "Submit";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: initialData || {
       name: "",
       email: "",
       gender: "",
@@ -104,6 +106,7 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
 
   return (
     <div>
+      <p className="text-xl font-bold">{title}</p>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -189,7 +192,7 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
             )}
           />
           <Button type="submit" disabled={loading}>
-            Submit
+            {action}
           </Button>
         </form>
       </Form>
