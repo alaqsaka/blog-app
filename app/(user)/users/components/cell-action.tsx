@@ -4,7 +4,6 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { User } from "./columns";
 import {
-  CreditCard,
   EditIcon,
   MoreHorizontal,
   PlusIcon,
@@ -13,7 +12,6 @@ import {
 } from "lucide-react";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,

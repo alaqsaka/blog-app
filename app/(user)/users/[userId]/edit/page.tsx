@@ -17,7 +17,6 @@ const UserEditPage = async ({ params }: { params: { userId: string } }) => {
 
   return (
     <div className="w-5/6 lg:w-4/6 mx-auto">
-      {params.userId}
       <UserForm initialData={user} />
     </div>
   );

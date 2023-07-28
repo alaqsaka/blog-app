@@ -87,11 +87,55 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
     }
   };
 
+  const onDelete = async (userId: number) => {
+    console.log("Delete user ", userId);
+
+    setLoading(true);
+
+    const res = await fetch(
+      `https://gorest.co.in/public/v2/users/${initialData?.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("res ", res);
+
+    if (!res.ok) {
+      const responseData = await res.json();
+
+      let errorMessage = "";
+      if (responseData.length) {
+        for (let index = 0; index < responseData.length; index++) {
+          errorMessage += `${responseData[index].field} ${responseData[index].message}`;
+        }
+      }
+
+      setLoading(false);
+      toast.error(errorMessage);
+    } else {
+      setLoading(false);
+      toast.success("Success delete user");
+      routers.push(`/users/`);
+    }
+  };
+
   return (
     <div>
       <div className="flex justify-between">
         <p className="text-xl font-bold">{title}</p>
-        <Button variant="destructive">Delete User</Button>
+        {initialData && (
+          <Button
+            variant="destructive"
+            onClick={() => onDelete(initialData?.id)}
+          >
+            Delete User
+          </Button>
+        )}
       </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
