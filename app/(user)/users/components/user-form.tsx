@@ -44,6 +44,9 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
   const [loading, setLoading] = useState(false);
   const title = initialData ? "Edit User" : "Create New User";
   const action = initialData ? "Save Changes" : "Submit";
+  const successMessage = initialData
+    ? "Success Update User"
+    : "Success Create User";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -91,12 +94,12 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
     } else {
       setLoading(false);
       const responseData = await res.json();
-      toast.success("Success create user");
+      toast.success(successMessage);
       routers.push(`/users/${responseData.id}`);
     }
   };
 
-  const onDelete = async (userId: number) => {
+  const onDelete = async () => {
     setLoading(true);
 
     const res = await fetch(
@@ -129,10 +132,7 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
       <div className="flex justify-between">
         <p className="text-xl font-bold">{title}</p>
         {initialData && (
-          <Button
-            variant="destructive"
-            onClick={() => onDelete(initialData?.id)}
-          >
+          <Button variant="destructive" onClick={() => onDelete()}>
             Delete User
           </Button>
         )}
