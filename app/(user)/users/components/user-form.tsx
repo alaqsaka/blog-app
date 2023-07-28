@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -34,32 +35,12 @@ const formSchema = z.object({
 
 type UserFormValues = z.infer<typeof formSchema>;
 
-async function createUser(data: UserFormValues) {
-  console.log("token ", process.env.ACCESS_TOKEN);
-  const res = await fetch(`https://gorest.co.in/public/v2/users`, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-    },
-  });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
-
 interface UserFormProps {
   initialData: User | null;
 }
 
 const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
+  const routers = useRouter();
   const [loading, setLoading] = useState(false);
   const title = initialData ? "Edit User" : "Create New User";
   const action = initialData ? "Save Changes" : "Submit";
@@ -100,7 +81,9 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
       toast.error(errorMessage);
     } else {
       setLoading(false);
+      const responseData = await res.json();
       toast.success("Success create user");
+      routers.push(`/users/${responseData.id}`);
     }
   };
 
