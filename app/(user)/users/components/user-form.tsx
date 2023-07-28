@@ -59,14 +59,9 @@ interface UserFormProps {
   initialData: User | null;
 }
 
-interface Errors {
-  field: string;
-  message: string;
-}
-
 const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<Errors[]>();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -78,39 +73,33 @@ const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
   });
 
   const onSubmit = async (data: UserFormValues) => {
-    try {
-      console.log("Submitt", data);
-      console.log("token ", process.env.ACCESS_TOKEN);
-      setLoading(true);
-      const res = await fetch(`https://gorest.co.in/public/v2/users`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
+    setLoading(true);
 
-      if (!res.ok) {
-        const responseData = await res.json();
-        setErrors(responseData);
-        throw Error;
-      }
+    const res = await fetch(`https://gorest.co.in/public/v2/users`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    });
 
-      toast.success("Success create user");
-      //   await createUser(data).then((res) => console.log(res));
-    } catch (error) {
+    if (!res.ok) {
+      const responseData = await res.json();
+
       let errorMessage = "";
-      if (errors) {
-        for (let index = 0; index < errors.length; index++) {
-          errorMessage += `${errors[index].field} ${errors[index].message}`;
+      if (responseData.length) {
+        for (let index = 0; index < responseData.length; index++) {
+          errorMessage += `${responseData[index].field} ${responseData[index].message}`;
         }
       }
 
+      setLoading(false);
       toast.error(errorMessage);
-      console.log("[POST_USER]", error);
+    } else {
+      setLoading(false);
+      toast.success("Success create user");
     }
-    setLoading(false);
   };
 
   return (
