@@ -7,6 +7,7 @@ async function getUser(userId: string) {
       Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
     },
     cache: "no-store" || "no-cache",
+    next: { revalidate: 0 },
   });
 
   return res.json();
