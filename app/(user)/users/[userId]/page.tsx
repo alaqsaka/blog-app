@@ -81,12 +81,12 @@ const UserDetailPage = async ({ params }: { params: { userId: string } }) => {
                   </p>
                 </CardContent>
                 <CardFooter className="flex-col gap-2">
-                  <Link href={`/users/${user.id}/edit`} className="w-full">
+                  <a href={`/users/${user.id}/edit`} className="w-full">
                     <Button variant="default" className="w-full">
                       <EditIcon className="h-4 w-4 mr-2" />
                       Update User
                     </Button>
-                  </Link>
+                  </a>
                   {/* <Button variant="destructive" className="w-full">
                     <TrashIcon className="h-4 w-4 mr-2" />
                     Delete User
