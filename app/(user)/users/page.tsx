@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { DataTable } from "./components/data-table";
 import { columns } from "./components/columns";
+import LoadingUsers from "./loading";
 
 async function getUsersData() {
   const res = await fetch(
@@ -40,7 +41,9 @@ const UserPage = async () => {
 
   return (
     <div className="w-5/6 lg:w-4/6 mx-auto">
-      <DataTable columns={columns} data={users} />
+      <Suspense fallback={<LoadingUsers />}>
+        <DataTable columns={columns} data={users} />
+      </Suspense>
     </div>
   );
 };

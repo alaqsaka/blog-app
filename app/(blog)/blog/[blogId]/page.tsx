@@ -2,6 +2,8 @@ import { Separator } from "@/components/ui/separator";
 import { UserCircle } from "lucide-react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Suspense } from "react";
+import LoadingUsers from "./loading";
 
 interface Comment {
   name: string;
@@ -60,41 +62,45 @@ const BlogPage = async ({ params }: { params: { blogId: string } }) => {
 
   return (
     <div className="w-5/6 lg:w-4/6 mx-auto">
-      <h1 className="text-brand-primary mb-3 mt-2 text-center text-3xl font-semibold tracking-tight dark:text-white lg:text-4xl ">
-        {data.title}
-      </h1>
-      <div className="mt-3 flex justify-center space-x-3 text-gray-500 ">
-        <p className="font-semibold text-gray-900">
-          <a>
-            <span className="" />
-            User {data.user_id}
-          </a>
-        </p>
-      </div>
+      <Suspense fallback={<LoadingUsers />}>
+        <div>
+          <h1 className="text-brand-primary mb-3 mt-2 text-center text-3xl font-semibold tracking-tight dark:text-white lg:text-4xl ">
+            {data.title}
+          </h1>
+          <div className="mt-3 flex justify-center space-x-3 text-gray-500 ">
+            <p className="font-semibold text-gray-900">
+              <a>
+                <span className="" />
+                User {data.user_id}
+              </a>
+            </p>
+          </div>
 
-      <article className="mx-auto max-w-screen-md mt-5">
-        <div className="prose mx-auto my-3 dark:prose-invert prose-a:text-blue-600">
-          {data.body}
-        </div>
-      </article>
-
-      <Separator className="mt-10" />
-      <div className="mt-3">
-        <p className="text-lg">Comments</p>
-        {comments.length > 0 ? (
-          comments.map((comment: Comment) => (
-            <div key={comment.id} className="mt-3">
-              <Alert variant="default">
-                <UserCircle className="h-4 w-4" />
-                <AlertTitle>{comment.name}</AlertTitle>
-                <AlertDescription>{comment.body}</AlertDescription>
-              </Alert>
+          <article className="mx-auto max-w-screen-md mt-5">
+            <div className="prose mx-auto my-3 dark:prose-invert prose-a:text-blue-600">
+              {data.body}
             </div>
-          ))
-        ) : (
-          <p>Comment not found</p>
-        )}
-      </div>
+          </article>
+
+          <Separator className="mt-10" />
+          <div className="mt-3">
+            <p className="text-lg">Comments</p>
+            {comments.length > 0 ? (
+              comments.map((comment: Comment) => (
+                <div key={comment.id} className="mt-3">
+                  <Alert variant="default">
+                    <UserCircle className="h-4 w-4" />
+                    <AlertTitle>{comment.name}</AlertTitle>
+                    <AlertDescription>{comment.body}</AlertDescription>
+                  </Alert>
+                </div>
+              ))
+            ) : (
+              <p>Comment not found</p>
+            )}
+          </div>
+        </div>
+      </Suspense>
     </div>
   );
 };
