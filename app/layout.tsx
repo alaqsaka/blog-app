@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ToasterProvider />
         <Navbar />
-        {children}
+        <div className="min-h-full">{children}</div>
         <Footer />
       </body>
     </html>
