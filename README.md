@@ -6,17 +6,17 @@ Introducing Blogging: A simple website for blogging
 
 ## Requirement:
 
-#### Using javascript framework (NEXT.js) ✅
+#### 1. Using javascript framework (NEXT.js) ✅
 
-#### Please use data from public api https://gorest.co.in/ to generate a blog post. It’s up to you how to visualize the data, but you only need to show : ✅
+#### 2. Please use data from public api https://gorest.co.in/ to generate a blog post. It’s up to you how to visualize the data, but you only need to show : ✅
 
 - Blog post list ✅
 - Blog post detail with comment and user ✅
 - Users page with Create, Read, Update, Delete and Search users ✅
 
-#### Create readme.md file for documentation your code with how to run the application ✅
+#### 3. Create readme.md file for documentation your code with how to run the application ✅
 
-#### Deploy using vercel.com https://blog-app-alaqsaka.vercel.app ✅
+#### 4. Deploy using vercel.com https://blog-app-alaqsaka.vercel.app ✅
 
 ## Additional points:
 
