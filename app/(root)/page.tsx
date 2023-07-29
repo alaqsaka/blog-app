@@ -1,4 +1,6 @@
 import BlogCard from "@/components/ui/BlogCard";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 async function getData() {
   const res = await fetch("https://gorest.co.in/public/v2/posts", {
@@ -32,11 +34,13 @@ export default async function Home() {
 
   return (
     <div className="w-5/6 lg:w-4/6 mx-auto">
-      <div className="mx-auto grid mt-10 max-w-2xl grid-cols-1 gap-x-8 gap-y-16  lg:mx-0 lg:max-w-none lg:grid-cols-3">
-        {posts.map((post: Post) => (
-          <BlogCard data={post} key={post.id} />
-        ))}
-      </div>
+      <Suspense fallback={<Loading />}>
+        <div className="mx-auto grid mt-10 max-w-2xl grid-cols-1 gap-x-8 gap-y-16  lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          {posts.map((post: Post) => (
+            <BlogCard data={post} key={post.id} />
+          ))}
+        </div>
+      </Suspense>
     </div>
   );
 }
