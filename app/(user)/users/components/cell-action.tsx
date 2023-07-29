@@ -76,9 +76,12 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>User Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem
+            className="cursor-pointer"
+            onClick={() => router.push(`/users/${data.id}/create-blog`)}
+          >
             <PlusIcon className="mr-2 h-4 w-4" />
-            <span>Add New Post</span>
+            <span>Add New Blog</span>
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => router.push(`/users/${data.id}`)}

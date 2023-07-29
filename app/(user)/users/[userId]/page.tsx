@@ -99,9 +99,11 @@ const UserDetailPage = async ({ params }: { params: { userId: string } }) => {
                 <p className="text-xl font-bold">
                   Blogs written by {user.name}
                 </p>
-                <Button variant="outline">
-                  <PlusSquare className="h-4 w-4 mr-2" /> Create New Post
-                </Button>
+                <a href={`/users/${user.id}/create-blog`}>
+                  <Button variant="outline">
+                    <PlusSquare className="h-4 w-4 mr-2" /> Create New Blog
+                  </Button>
+                </a>
               </div>
 
               {posts.length ? (
