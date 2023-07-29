@@ -1,34 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blogging
 
-## Getting Started
+Purpose of the project:
 
-First, run the development server:
+Introducing Blogging: A simple website for blogging
+
+## Requirement:
+
+#### Using javascript framework (NEXT.js) ✅
+
+#### Please use data from public api https://gorest.co.in/ to generate a blog post. It’s up to you how to visualize the data, but you only need to show : ✅
+
+- Blog post list ✅
+- Blog post detail with comment and user ✅
+- Users page with Create, Read, Update, Delete and Search users ✅
+
+#### Create readme.md file for documentation your code with how to run the application ✅
+
+#### Deploy using vercel.com https://blog-app-alaqsaka.vercel.app ✅
+
+## Additional points:
+
+1. Using pagination to show data. ✅
+2. Good user interface. ✅
+3. Responsive. ✅
+4. Optimized app (eg. server side rendering, state management, no errors & warnings). ✅
+
+## Demo
+
+Insert gif or link to demo
+
+## Tech Stack
+
+- Node v16.18.0
+- NextJS 13.4.12
+- React 18.2.0
+- Typescript 5.1.3
+- Shadcn/ui
+- TailwindCSS
+- react-hook-form
+- lucid-react
+- zod
+
+## Installation
+
+- Clone this repository
+- Go to the folder application using cd command on your cmd or terminal
+- Run this script
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  npm install
+
+  npm run dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Go to link http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Blog List (with pagination)
+- Blog Detail Page (with Comment and User)
+- Users List Page (with pagination, search, create)
+- User detail page (update, delete)
+- User Create Blog
