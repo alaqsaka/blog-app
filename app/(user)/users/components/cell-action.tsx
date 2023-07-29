@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { User } from "./columns";
+import { toast } from "react-hot-toast";
 import {
   EditIcon,
   MoreHorizontal,
@@ -38,12 +39,30 @@ interface CellActionProps {
 const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
-  const onDelete = () => {
+  const onDelete = async (userId: number) => {
     try {
-      console.log("Delete user");
-      setOpen(false);
-    } catch (error) {}
+      setLoading(true);
+      const res = await fetch(
+        `https://gorest.co.in/public/v2/users/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+          },
+        }
+      );
+
+      if (res.ok) {
+        setLoading(false);
+        setOpen(false);
+        toast.success("Success Delete User");
+        router.refresh();
+      }
+    } catch (error) {
+      toast.error("Something Went Wrong");
+    }
   };
 
   return (
@@ -90,12 +109,15 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                 <AlertDialogDescription>
                   This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
+                  user and remove data from our the server.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={() => onDelete()}>
+                <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
+                <AlertDialogAction
+                  disabled={loading}
+                  onClick={() => onDelete(data.id)}
+                >
                   Continue
                 </AlertDialogAction>
               </AlertDialogFooter>
