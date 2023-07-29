@@ -46,9 +46,15 @@ export default async function Home({
     <div className="w-5/6 lg:w-4/6 mx-auto">
       <Suspense fallback={<Loading />}>
         <div className="mx-auto grid mt-10 max-w-2xl grid-cols-1 gap-x-8 gap-y-16  lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {posts.map((post: Post) => (
-            <BlogCard data={post} key={post.id} />
-          ))}
+          {posts?.length == 0 ? (
+            <div>No Result.</div>
+          ) : (
+            <>
+              {posts.map((post: Post) => (
+                <BlogCard data={post} key={post.id} />
+              ))}
+            </>
+          )}
         </div>
       </Suspense>
       <div className="text-center mt-10 flex-row flex items-center justify-center gap-4">
