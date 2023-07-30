@@ -116,7 +116,12 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
+                <AlertDialogCancel
+                  disabled={loading}
+                  onClick={() => setOpen(false)}
+                >
+                  Cancel
+                </AlertDialogCancel>
                 <AlertDialogAction
                   disabled={loading}
                   onClick={() => onDelete(data.id)}
