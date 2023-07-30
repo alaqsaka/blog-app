@@ -19,7 +19,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ data }) => {
   return (
     <article
       onClick={() => router.push(`/blog/${data.id}`)}
-      className="cursor-pointer flex max-w-xl flex-col rounded-lg border p-6 items-start justify-between"
+      className="cursor-pointer flex max-w-xl flex-col  p-6 items-start justify-between"
     >
       <div className="group relative">
         <h2 className="text-lg font-semibold leading-snug tracking-tight mt-2    dark:text-white">

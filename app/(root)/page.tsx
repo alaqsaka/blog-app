@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Card } from "@/components/ui/card";
 
 async function getData(page: number) {
   const res = await fetch(
@@ -51,7 +52,9 @@ export default async function Home({
           ) : (
             <>
               {posts.map((post: Post) => (
-                <BlogCard data={post} key={post.id} />
+                <Card key={post.id}>
+                  <BlogCard data={post} key={post.id} />
+                </Card>
               ))}
             </>
           )}
