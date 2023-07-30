@@ -100,12 +100,15 @@ const UserDetailPage = async ({ params }: { params: { userId: string } }) => {
                 </Card>
               </div>
               <div className="lg:w-full mt-3 lg:mt-0">
-                <div className="flex justify-between">
+                <div className="md:flex justify-between">
                   <p className="text-xl font-bold">
                     Blogs written by {user.name}
                   </p>
                   <a href={`/users/${user.id}/create-blog`}>
-                    <Button variant="outline">
+                    <Button
+                      variant="outline"
+                      className="w-full md:w-auto mt-2 md:mt-0"
+                    >
                       <PlusSquare className="h-4 w-4 mr-2" /> Create New Blog
                     </Button>
                   </a>

@@ -51,7 +51,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4 justify-between">
+      <div className="md:flex items-center py-4 justify-between">
         <Input
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
@@ -61,7 +61,10 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
         />
 
-        <Button onClick={() => router.push("/users/new")}>
+        <Button
+          onClick={() => router.push("/users/new")}
+          className="w-full md:w-auto mt-2 md:mt-0"
+        >
           <PlusIcon className="h-4 w-4 mr-2" />
           Create new user
         </Button>
