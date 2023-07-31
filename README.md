@@ -24,10 +24,12 @@ Introducing Blogging: A simple website for blogging
 2. Good user interface. ✅
 3. Responsive. ✅
 4. Optimized app (eg. server side rendering, state management, no errors & warnings). ✅
+![image](https://github.com/alaqsaka/blog-app/assets/40936981/df3dabe3-8a0c-4b7f-9df8-9eaae83c88c7)
+![image](https://github.com/alaqsaka/blog-app/assets/40936981/7134a809-e3af-470e-85eb-6fc083dc224d)
 
 ## Demo
 
-Insert gif or link to demo
+https://youtu.be/YsmpJJ96uqg
 
 ## Tech Stack
 
