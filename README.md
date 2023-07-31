@@ -25,10 +25,6 @@ Introducing Blogging: A simple website for blogging
 3. Responsive. ✅
 4. Optimized app (eg. server side rendering, state management, no errors & warnings). ✅
 
-## Demo
-
-https://youtu.be/YsmpJJ96uqg
-
 ## Tech Stack
 
 - Node v16.18.0
